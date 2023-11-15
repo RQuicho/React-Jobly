@@ -17,7 +17,7 @@ const RoutePaths = () => {
     <Routes>
       <Route path='/' element={<Homepage />} />
       <Route path='/companies' element={<CompaniesList />} />
-      <Route path={`/companies/${handle}`} element={<CompanyDetails />} />
+      {/* <Route path={`/companies/${handle}`} element={<CompanyDetails />} /> */}
       <Route path='/jobs' element={<JobsList />} />
       <Route path='/login' element={<LoginPage />} />
       <Route path='/signup' element={<SignupPage />} />
