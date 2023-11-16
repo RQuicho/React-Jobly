@@ -1,6 +1,7 @@
 import React from 'react';
 
-const CompanyCard = (company) => {
+
+const CompanyCard = ({company}) => {
   return (
     <div>
       {/* <h1>Card showing company name and short description</h1>

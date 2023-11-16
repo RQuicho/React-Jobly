@@ -12,7 +12,7 @@ const NavBar = () => {
 
         <Nav className='ml-auto' navbar>
           <NavItem>
-            <NavLink to='/companies' activeCalssName='active-link'>Companies</NavLink>
+            <NavLink to='/companies'>Companies</NavLink>
           </NavItem>
           <NavItem>
             <NavLink to='/jobs'>Jobs</NavLink>
