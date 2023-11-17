@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import JoblyApi from '../api';
 import CompanyCard from './CompanyCard';
+import JobCard from '../jobs/JobCard';
 import NotFoundCompany from '../NotFoundCompany';
 
 const CompanyDetails = () => {
@@ -31,10 +32,12 @@ const CompanyDetails = () => {
 
   return (
     <div>
-      <h1>Details of company and also lists jobs</h1>
-      <p>Put JobsList component here?</p>
       <CompanyCard company={company} />
-
+      {company.jobs.map(job => (
+        <div key={job.id}>
+          <JobCard job={job}/>
+        </div>
+      ))}
     </div>
   )
 }
