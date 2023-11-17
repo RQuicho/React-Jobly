@@ -10,6 +10,8 @@ const NavBar = () => {
           Jobly
         </NavLink>
 
+        {/* Show links to login and signup forms depending on if user is logged in */}
+
         <Nav className='ml-auto' navbar>
           <NavItem>
             <NavLink to='/companies'>Companies</NavLink>

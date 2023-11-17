@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import JoblyApi from '../api';
 import CompanyCard from './CompanyCard';
 import JobCard from '../jobs/JobCard';
-import NotFoundCompany from '../NotFoundCompany';
+import NotFoundCompany from '../not-found/NotFoundCompany';
 
 const CompanyDetails = () => {
   const [company, setCompany] = useState([]);
