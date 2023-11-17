@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {Routes, Route, useParams} from 'react-router-dom';
+import React from 'react';
+import {Routes, Route} from 'react-router-dom';
 
 import Homepage from './Homepage';
-import CompaniesList from './CompaniesList';
+import CompaniesList from './companies/CompaniesList';
 import JobsList from './JobsList';
 import LoginPage from './Login';
 import SignupPage from './Signup';
 import ProfilePage from './Profile';
 import NotFoundList from './NotFoundList';
-import CompanyDetails from './CompanyDetails';
+import CompanyDetails from './companies/CompanyDetails';
 
 const RoutePaths = () => {
 

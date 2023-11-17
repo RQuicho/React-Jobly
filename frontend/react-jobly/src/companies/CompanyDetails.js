@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import JoblyApi from './api';
+import JoblyApi from '../api';
 import CompanyCard from './CompanyCard';
-import NotFoundCompany from './NotFoundCompany';
+import NotFoundCompany from '../NotFoundCompany';
 
 const CompanyDetails = () => {
   const [company, setCompany] = useState([]);
@@ -19,7 +19,7 @@ const CompanyDetails = () => {
     }
     getCompanyDetails();
   }, [handle]);
-  console.log('company...', company);
+  // console.log('company...', company);
   
   if(company === null || company && !company.handle) {
     return (
