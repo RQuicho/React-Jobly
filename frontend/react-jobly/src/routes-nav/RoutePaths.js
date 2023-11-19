@@ -6,7 +6,7 @@ import CompaniesList from '../companies/CompaniesList';
 import JobsList from '../jobs/JobsList';
 import LoginForm from '../Forms/LoginForm';
 import SignupForm from '../Forms/Signupform';
-import ProfilePage from '../Profile';
+import ProfileForm from '../Forms/ProfileForm';
 import NotFoundList from '../not-found/NotFoundList';
 import CompanyDetails from '../companies/CompanyDetails';
 import ProtectedRoute from './ProtectedRoute';
@@ -21,7 +21,7 @@ const RoutePaths = ({login, signup}) => {
       <ProtectedRoute path='/jobs' element={<JobsList />} />
       <Route path='/login' element={<LoginForm login={login} />} />
       <Route path='/signup' element={<SignupForm signup={signup} />} />
-      <ProtectedRoute path='/profile' element={<ProfilePage />} />
+      <ProtectedRoute path='/profile' element={<ProfileForm />} />
       <Route path='*' element={<NotFoundList />} />
     </Routes>
   )
