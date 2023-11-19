@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { Navigate } from 'react-router-dom';
 
 const LoginForm = ({login}) => {
   const initialState = {
@@ -7,7 +8,7 @@ const LoginForm = ({login}) => {
   }
   const [formData, setFormData] = useState(initialState);
 
-  const handleChange = () => {
+  const handleChange = (e) => {
     const {name, value} = e.target;
     setFormData(formData => ({
       ...formData,
@@ -15,33 +16,44 @@ const LoginForm = ({login}) => {
     }));
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login({...formData});
-    setFormData(initialState);
+    let result = await login(formData);
+    if (result.success) {
+      <Navigate to='/companies' />
+    } else {
+      console.error('form error', result.errors);
+      return (<p>{`Error: ${result.errors}`}</p>)
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor='username'>Username</label>
-      <input 
-        id='username'
-        type='text'
-        name='username'
-        placeholder='username'
-        value={formData.username}
-        onChange={handleChange}
-      />
-     <label htmlFor='password'>Password</label>
-      <input 
-        id='password'
-        type='text'
-        name='password'
-        placeholder='password'
-        value={formData.password}
-        onChange={handleChange}
-      />
-    </form>
+    <div>
+      <h3>Log In</h3>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor='username'>Username</label>
+        <input 
+          id='username'
+          type='text'
+          name='username'
+          placeholder='username'
+          value={formData.username}
+          onChange={handleChange}
+          required
+        />
+      <label htmlFor='password'>Password</label>
+        <input 
+          id='password'
+          type='password'
+          name='password'
+          placeholder='password'
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+      <button>Submit</button>
+      </form>
+    </div>
   )
 }
 

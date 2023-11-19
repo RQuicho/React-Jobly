@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { Navigate } from 'react-router-dom';
 
-const SignupForm = ({addUser}) => {
+const SignupForm = ({signup}) => {
   const initialState = {
     username: '',
     password: '',
@@ -10,7 +11,7 @@ const SignupForm = ({addUser}) => {
   }
   const [formData, setFormData] = useState(initialState);
 
-  const handleChange = () => {
+  const handleChange = (e) => {
     const {name, value} = e.target;
     setFormData(formData => ({
       ...formData,
@@ -18,60 +19,68 @@ const SignupForm = ({addUser}) => {
     }));
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addUser({...formData});
-    setFormData(initialState);
+    let result = await signup(formData);
+    if (result.success) {
+      <Navigate to='/companies'/>
+    } else {
+      console.error('form error', result.errors);
+      return (<p>{`Error: ${result.errors}`}</p>);
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor='username'>Username</label>
-      <input 
-        id='username'
-        type='text'
-        name='username'
-        placeholder='new username'
-        value={formData.username}
-        onChange={handleChange}
-      />
-     <label htmlFor='password'>Password</label>
-      <input 
-        id='password'
-        type='text'
-        name='password'
-        placeholder='password'
-        value={formData.password}
-        onChange={handleChange}
-      />
-     <label htmlFor='firstName'>First Name</label>
-      <input 
-        id='firstName'
-        type='text'
-        name='firstName'
-        placeholder='first name'
-        value={formData.firstName}
-        onChange={handleChange}
-      />
-     <label htmlFor='lastName'>Last Name</label>
-      <input 
-        id='lastName'
-        type='text'
-        name='lastName'
-        placeholder='last name'
-        value={formData.lastName}
-        onChange={handleChange}
-      />
-     <label htmlFor='email'>Email</label>
-      <input 
-        id='email'
-        type='text'
-        name='email'
-        placeholder='email'
-        value={formData.email}
-        onChange={handleChange}
-      />
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor='username'>Username</label>
+        <input 
+          id='username'
+          type='text'
+          name='username'
+          placeholder='new username'
+          value={formData.username}
+          onChange={handleChange}
+        />
+      <label htmlFor='password'>Password</label>
+        <input 
+          id='password'
+          type='text'
+          name='password'
+          placeholder='password'
+          value={formData.password}
+          onChange={handleChange}
+        />
+      <label htmlFor='firstName'>First Name</label>
+        <input 
+          id='firstName'
+          type='text'
+          name='firstName'
+          placeholder='first name'
+          value={formData.firstName}
+          onChange={handleChange}
+        />
+      <label htmlFor='lastName'>Last Name</label>
+        <input 
+          id='lastName'
+          type='text'
+          name='lastName'
+          placeholder='last name'
+          value={formData.lastName}
+          onChange={handleChange}
+        />
+      <label htmlFor='email'>Email</label>
+        <input 
+          id='email'
+          type='text'
+          name='email'
+          placeholder='email'
+          value={formData.email}
+          onChange={handleChange}
+        />
+      </form>
+      <button>Submit</button>
+    </div>
   )
 }
 

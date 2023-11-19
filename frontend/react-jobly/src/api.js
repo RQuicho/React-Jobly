@@ -55,6 +55,24 @@ class JoblyApi {
     let res = await this.request("jobs", {title});
     return res.jobs;
   }
+
+  /** Get data on user based on username. */
+  static async getUser(username) {
+    let res = await this.request(`users/${username}`); // from backend/routes/users.js
+    return res.user;
+  }
+
+  /** Get token for login. */
+  static async login(data) {
+    let res = await this.request(`auth/token`, data, "post"); // from backend/routes/auth.js
+    return res.token;
+  }
+
+  /** Signup new user. */
+  static async signup(data) {
+    let res = await this.request(`auth/register`, data, "post"); // from backend/routes/auth.js
+    return res.token;
+  }
   
 
 }
