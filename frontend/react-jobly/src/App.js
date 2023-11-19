@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import {BrowserRouter} from 'react-router-dom';
-import RoutePaths from './RoutePaths';
-import NavBar from './NavBar';
+import RoutePaths from './routes-nav/RoutePaths';
+import NavBar from './routes-nav/NavBar';
 import JoblyApi from './api';
 import jwt from 'jsonwebtoken';
 import UserContext from './UserContext';
 import useLocalStorage from './hooks/useLocalStorage';
 
+export const TOKEN_STORAGE_ID = 'jobly-token';
 
 function App() {
-  const [token, setToken] = useState(JoblyApi.token);
+  const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
