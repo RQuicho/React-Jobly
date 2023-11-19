@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import {Navbar, Nav, NavItem} from 'reactstrap';
+import UserContext from './UserContext';
 
-const NavBar = () => {
-  return (
-    <div>
+const NavBar = ({logout}) => {
+  const {currentUser} = useContext(UserContext);
+
+  const navLoggedIn = () => {
+    return (
       <Navbar expand="md" color='light'>
         <NavLink to='/' className="navbar-brand">
           Jobly
         </NavLink>
-
-        {/* Show links to login and signup forms depending on if user is logged in */}
-
         <Nav className='ml-auto' navbar>
           <NavItem>
             <NavLink to='/companies'>Companies</NavLink>
@@ -19,10 +19,40 @@ const NavBar = () => {
           <NavItem>
             <NavLink to='/jobs'>Jobs</NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink to='/' onClick={logout}>
+              Logout {currentUser.username}
+            </NavLink>
+          </NavItem>
         </Nav>
       </Navbar>
+    );
+  }
+
+  const navLoggedOut = () => {
+    return (
+      <Navbar expand="md" color='light'>
+        <NavLink to='/' className="navbar-brand">
+          Jobly
+        </NavLink>
+        <Nav className='ml-auto' navbar>
+          <NavItem>
+            <NavLink to='/login'>Login</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to='/signup'>Signup</NavLink>
+          </NavItem>
+        </Nav>
+      </Navbar>
+    );
+  }
+
+  return (
+    <div>
+      {currentUser ? navLoggedIn() : navLoggedOut()}
     </div>
-  )
+  );
+
 }
 
 export default NavBar;
